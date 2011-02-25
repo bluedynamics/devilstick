@@ -167,3 +167,26 @@ Here the constraint:
     >>> root['invariant1'].type = 'dependency'
     >>> 
         
+Payload
+=======
+
+DSNode offers a generic way to add any payload to the model. DSNode uses 
+nodespaces and the ``payload`` attribute access returns a nodepace. 
+It expects any object implementing IPayload. 
+
+Mock some Payload:: 
+
+    >>> from zope.implements import interface
+    >>> from devilstick.interfaces import IPayload    
+    >>> class MockPayload(object)
+    >>>     implements(IPayload)
+
+Add Payload to some DSNode::
+    
+    >>> from devilstick.metamodel.elements import DSNode
+    >>> modelnode = DSNode()
+    >>> mockpayload = MockPayload()
+    >>> modelnode.payload.foobar = MockPayload()
+    >>> modelnode.payload.foobar is mockpayload
+    True
+    
