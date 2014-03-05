@@ -1,27 +1,25 @@
-# Copyright 2007-2009, BlueDynamics Alliance - http://bluedynamics.com
-# BSD License derivative, see LICENSE.txt or package long description.
-
-import unittest
 import doctest
-import pprint
 import interlude
+import pprint
+import unittest
 
 optionflags = doctest.NORMALIZE_WHITESPACE | \
               doctest.ELLIPSIS | \
               doctest.REPORT_ONLY_FIRST_FAILURE
 
 TESTFILES = [
-    '../elements.txt',
+    'metamodel.rst',
 ]
+
 
 def test_suite():
     return unittest.TestSuite([
         doctest.DocFileSuite(
-            file, 
+            filename,
             optionflags=optionflags,
             globs=dict(interact=interlude.interact, pprint=pprint.pprint),
-        ) for file in TESTFILES
+        ) for filename in TESTFILES
     ])
 
 if __name__ == '__main__':
-    unittest.main(defaultTest='test_suite') 
+    unittest.main(defaultTest='test_suite')
