@@ -94,7 +94,7 @@ class IDSConstraint(IDSBehavior):
     """Rule for a certain structural element contained in parent
     element.
     """
-    validfor = Attribute("Element this constraint is valid for.")
+    valid_for = Attribute("Element this constraint is valid for.")
 
 
 class IDSInvariant(IDSBehavior):
@@ -103,7 +103,7 @@ class IDSInvariant(IDSBehavior):
     Invariants are rules dependent on existence (or values) of two or more
     structural elements in the container.
     """
-    validfor = Attribute("List of elements this invariant is valid for.")
+    valid_for = Attribute("List of elements this invariant is valid for.")
 
 
 class IDSValidation(IDSBehavior):

@@ -102,7 +102,7 @@ class DSContainer(DSNode):
     @property
     def constraints(self, childname):
         return [n for n in self.filterNodes(interfaces.IDSConstraint) \
-                if n.validfor == childname]
+                if n.valid_for == childname]
 
 
 @implementer(interfaces.IDSAttribute)
@@ -174,25 +174,25 @@ class DSConstraint(DSBehavior):
     """Devilstick Constraint Model Node
     """
 
-    _validfor = None
+    _valid_for = None
 
     @property
-    def validfor(self):
-        if self._validfor is None or self._validfor not in self.__parent__:
+    def valid_for(self):
+        if self._valid_for is None or self._valid_for not in self.__parent__:
             raise KeyError("Constraint has no valid target.")
-        return self.__parent__[self._validfor]
+        return self.__parent__[self._valid_for]
 
-    @validfor.setter
-    def validfor(self, childname):
+    @valid_for.setter
+    def valid_for(self, childname):
         if not isinstance(childname, basestring):
             raise TypeError("string expected, but got %s" % type(childname))
-        self._validfor = childname
+        self._valid_for = childname
 
     def __repr__(self):
         return "<%s '%s' of type '%s' (%s) for '%s' at %s>" % \
                (self.__class__.__name__, self.__name__, self.type,
                 self.sufficient and 'sufficient' or 'unsufficient',
-                self._validfor,
+                self._valid_for,
                 hex(id(self))[:-1])
 
 
@@ -201,33 +201,33 @@ class DSInvariant(DSBehavior):
     """Devilstick Invariant Model Node
     """
 
-    _validfor = None
+    _valid_for = None
 
     @property
-    def validfor(self):
-        if self._validfor is None:
+    def valid_for(self):
+        if self._valid_for is None:
             raise KeyError("Invariant has no valid targets.")
-        for childname in self._validfor:
+        for childname in self._valid_for:
             if childname not in self.__parent__:
                 raise KeyError("Invariant has no valid targets.")
             yield self.__parent__[childname]
 
-    @validfor.setter
-    def validfor(self, childnames):
+    @valid_for.setter
+    def valid_for(self, childnames):
         for childname in childnames:
             if not isinstance(childname, basestring):
                 raise TypeError(
                     "string expected, but got {0}".format(type(childname))
                 )
         if len(childnames) < 2:
-            raise ValueError("invariant needs at least 2 validfor children")
-        self._validfor = childnames
+            raise ValueError("invariant needs at least 2 valid_for children")
+        self._valid_for = childnames
 
     def __repr__(self):
         return "<%s '%s' of type '%s' (%s) for '%s' at %s>" % \
                (self.__class__.__name__, self.__name__, self.type,
                 self.sufficient and 'sufficient' or 'unsufficient',
-                self._validfor and ', '.join(self._validfor) or self._validfor,
+                self._valid_for and ', '.join(self._valid_for) or self._valid_for,
                 hex(id(self))[:-1])
 
 

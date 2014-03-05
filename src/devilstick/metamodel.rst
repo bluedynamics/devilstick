@@ -151,19 +151,19 @@ Here the constraint::
     >>> from devilstick.metamodel import DSConstraint
     >>> root['constraint1'] = DSConstraint()
     >>> root['constraint1'].type = 'multiplicity'
-    >>> root['constraint1'].validfor = 1
+    >>> root['constraint1'].valid_for = 1
     Traceback (most recent call last):
     ...
     TypeError: string expected, but got <type 'int'>
 
-    >>> root['constraint1'].validfor = 'nonexistent'
-    >>> root['constraint1'].validfor
+    >>> root['constraint1'].valid_for = 'nonexistent'
+    >>> root['constraint1'].valid_for
     Traceback (most recent call last):
     ...
     KeyError: 'Constraint has no valid target.'
 
-    >>> root['constraint1'].validfor = 'age'
-    >>> root['constraint1'].validfor
+    >>> root['constraint1'].valid_for = 'age'
+    >>> root['constraint1'].valid_for
     <DSAttribute 'age' of type 'integer' at ...>
 
     >>> root['constraint1'].settings = 1
